@@ -3,7 +3,7 @@ import yfinance as yf
 
 
 def fetch_all_market_data():
-  print("\n[1] 매크로 및 4대 지표 실시간 데이터 수집 중...")
+  print("\n[1] 매크로 및 4대 지표 기간별 데이터 수집 중 (2026-10-18 ~ 2026-10-24)...")
   tickers = {
       "US 10Y Yield": "^TNX",
       "VIX": "^VIX",
@@ -17,7 +17,10 @@ def fetch_all_market_data():
 
   data = {}
   for name, ticker in tickers.items():
-    df = yf.download(ticker, period="3mo", progress=False)
+    # start와 end 날짜를 지정하여 데이터 수집 (end 날짜는 포함되지 않으므로 25일로 지정)
+    df = yf.download(
+        ticker, start="2026-10-18", end="2026-10-25", progress=False
+    )
     if not df.empty:
       close = (
           df[("Close", ticker)]
@@ -27,5 +30,5 @@ def fetch_all_market_data():
       data[name] = close
 
   df_all = pd.DataFrame(data)
-  print(df_all.tail(3))
+  print(df_all)
   return df_all
