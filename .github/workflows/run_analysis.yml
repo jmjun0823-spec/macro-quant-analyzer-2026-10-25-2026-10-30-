@@ -1,18 +1,11 @@
 name: Full Market & Quant Analysis Pipeline
 
 on:
-  name: Full Market & Quant Analysis Pipeline
-
-on:
   push:
-    branches: [ "main" ]  
+    branches: [ "main" ]
   workflow_dispatch:
   schedule:
     - cron: '0 23 * * 1-5'
-
-jobs:
-  run-pipeline:
-    runs-on: ubuntu-latest
 
 jobs:
   run-pipeline:
